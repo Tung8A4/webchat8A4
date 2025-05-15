@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> CHÁT 8A4 - Anh Em Kết Nối 😎🔥</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #1a202c, #2d3748);
+      font-family: 'Arial', sans-serif;
+    }
+    #chat-container {
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #ff4500;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+    }
+    #messages {
+      background: #1a1a1a;
+      border-radius: 8px;
+    }
+    #message-input, #username-input, #password-input {
+      background: #2d2d2d;
+      color: #fff;
+      border: 1px solid #ff4500;
+    }
+    #send-button, #file-button, #emoji-button {
+      background: #ff4500;
+      transition: all 0.3s;
+    }
+    #send-button:hover, #file-button:hover, #emoji-button:hover {
+      background: #e03e00;
+    }
+    #emoji-picker {
+      display: none;
+      position: absolute;
+      bottom: 60px;
+      background: #2d2d2d;
+      border: 1px solid #ff4500;
+      border-radius: 5px;
+      padding: 10px;
+      max-width: 250px;
+      overflow-x: auto;
+      white-space: nowrap;
+      z-index: 10;
+    }
+    .emoji:hover {
+      background: #ff4500;
+      border-radius: 5px;
+    }
+    img, video {
+      max-width: 200px;
+      border-radius: 5px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div id="chat-container" class="w-full max-w-lg p-6">
+    <h1 class="text-3xl font-bold text-orange-500 text-center mb-4">Sigma Chat 🔥</h1>
+    <div id="password-section" class="mb-4">
+      <input
+        id="password-input"
+        type="password"
+        placeholder="Nhập mật khẩu..."
+        class="w-full p-2 rounded mb-2"
+      />
+      <button
+        id="password-button"
+        class="w-full p-2 rounded text-white font-bold"
+        style="background: #ff4500;"
+      >
+        Xác nhận
+      </button>
+    </div>
+    <div id="username-section" class="mb-4 hidden">
+      <input
+        id="username-input"
+        type="text"
+        placeholder="Nhập tên của bạn..."
+        class="w-full p-2 rounded"
+      />
+      <button
+        id="join-button"
+        class="w-full mt-2 p-2 rounded text-white font-bold"
+        style="background: #ff4500;"
+      >
+        Vào Chat
+      </button>
+    </div>
+    <div id="chat-section" class="hidden">
+      <div id="messages" class="h-80 overflow-y-auto p-4 mb-4"></div>
+      <div class="flex gap-2 relative">
+        <input
+          id="message-input"
+          type="text"
+          placeholder="Gõ tin nhắn... "
+          class="flex-1 p-2 rounded"
+        />
+        <input
+          id="file-input"
+          type="file"
+          accept="image/*,video/*"
+          class="hidden"
+        />
+        <button id="file-button" class="px-2 py-2 rounded text-white font-bold">
+          🧷
+        </button>
+        <button id="emoji-button" class="px-2 py-2 rounded text-white font-bold">
+          😀
+        </button>
+        <button id="send-button" class="px-4 py-2 rounded text-white font-bold">
+          Gửi
+        </button>
+        <div id="emoji-picker">
+          <span class="emoji">😎</span>
+          <span class="emoji">🔥</span>
+          <span class="emoji">😂</span>
+          <span class="emoji">🚀</span>
+          <span class="emoji">💪</span>
+          <span class="emoji">😍</span>
+          <span class="emoji">🤓</span>
+          <span class="emoji">🥳</span>
+          <span class="emoji">😈</span>
+          <span class="emoji">🦁</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="client.js"></script>
+</body>
+</html>
